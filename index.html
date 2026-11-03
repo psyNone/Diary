@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marriage Decision Moments · A Five-Day Diary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Nunito:wght@400;600;700&family=Patrick+Hand&family=Patrick+Hand+SC&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cover:#2e4759;
+  --cover-2:#26394a;
+  --page:#fbf8f1;
+  --left:#f6f1e7;
+  --ink:#2c3747;
+  --ink-soft:#6f7888;
+  --navy:#38506f;
+  --navy-2:#2d4260;
+  --blue:#c6d6e8;
+  --blue-2:#dfe8f2;
+  --yellow:#f2dc9c;
+  --yellow-2:#f8ecc8;
+  --cream:#f1e8d8;
+  --beige:#e2d8c9;
+  --teal:#5a7d8c;
+  --dot:#d9d2c5;
+  --zh-hand:"Patrick Hand","ZCOOL KuaiLe","Noto Sans SC",cursive;
+  --en-hand:"Patrick Hand","ZCOOL KuaiLe",cursive;
+  --en-sc:"Patrick Hand SC","Patrick Hand",cursive;
+  --body:"Nunito","Noto Sans SC","PingFang SC",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:#e9e4dc;
+  background-image:radial-gradient(circle at 20% 10%,#f3efe8,transparent 50%),radial-gradient(circle at 80% 100%,#ddd6cb,transparent 50%);
+  min-height:100vh;color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+.en{font-family:var(--en-hand);color:var(--ink-soft);font-size:1.05em;letter-spacing:.01em}
+.desk{padding:26px 18px 40px;display:flex;justify-content:center}
+
+/* ================= BOOK ================= */
+.book{position:relative;width:100%;max-width:1180px;background:var(--cover);border-radius:30px;padding:14px 54px 54px 14px;
+  box-shadow:0 2px 0 var(--cover-2),0 24px 50px rgba(30,40,55,.28)}
+.book:before{content:"";position:absolute;left:0;right:0;top:0;height:16px;border-radius:30px 30px 0 0;background:linear-gradient(#3a586c,transparent);opacity:.6}
+.spread{display:flex;gap:0;position:relative;z-index:2;min-height:760px}
+.leftpage{width:270px;flex:none;background:var(--left);border-radius:22px 0 0 22px;padding:28px 22px 24px;position:relative;
+  box-shadow:inset -14px 0 18px -14px rgba(60,50,40,.18)}
+.page{flex:1;min-width:0;background-color:var(--page);border-radius:0 22px 22px 0;padding:26px 34px 30px;position:relative;
+  box-shadow:-2px 0 0 rgba(0,0,0,.03)}
+.page.solo{border-radius:22px}
+.paper-dot{background-image:radial-gradient(circle,var(--dot) 1.1px,transparent 1.4px);background-size:20px 20px;background-position:10px 10px}
+.paper-grid{background-image:linear-gradient(#ece5d8 1px,transparent 1px),linear-gradient(90deg,#ece5d8 1px,transparent 1px);background-size:22px 22px}
+.paper-lined{background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,#e9e1d2 31px,#e9e1d2 32px)}
+.paper-blank{background-image:none}
+
+/* side tabs */
+.tabs{position:absolute;right:6px;top:34px;display:flex;flex-direction:column;gap:6px;z-index:1}
+.tab{width:44px;min-height:64px;border:0;border-radius:0 12px 12px 0;background:var(--blue);color:var(--navy-2);
+  font-family:var(--en-sc);font-size:15px;letter-spacing:.12em;writing-mode:vertical-rl;text-orientation:mixed;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;padding:8px 0 8px 6px;transition:.2s;
+  box-shadow:inset 6px 0 6px -4px rgba(0,0,0,.18)}
+.tab:hover{transform:translateX(3px)}
+.tab.done{background:var(--beige);color:#6f6658}
+.tab.current,.tab.viewing{background:var(--navy-2);color:#fff;width:50px;box-shadow:0 0 0 2px rgba(255,255,255,.7),inset 6px 0 6px -4px rgba(0,0,0,.3)}
+.tab.locked{opacity:.55;cursor:default}
+.tab.locked:hover{transform:none}
+.tab.letter{background:var(--teal);color:#eef4f6;min-height:74px}
+.tab .ck{writing-mode:horizontal-tb;font-size:12px;margin-top:4px}
+
+/* bottom tabs */
+.btabs{position:absolute;left:220px;bottom:8px;display:flex;gap:8px;z-index:1}
+.btab{border:0;font-family:var(--en-sc);font-size:16px;letter-spacing:.14em;padding:6px 24px 8px;border-radius:0 0 14px 14px;background:var(--blue);color:var(--navy-2);cursor:pointer;
+  box-shadow:inset 0 6px 6px -4px rgba(0,0,0,.18);transition:.2s}
+.btab .z{font-family:var(--zh-hand);letter-spacing:0;font-size:13px;margin-left:6px;opacity:.75}
+.btab:hover{transform:translateY(2px)}
+.btab.on{background:var(--navy-2);color:#fff}
+.btab:nth-child(3){background:var(--beige)}
+.btab:nth-child(3).on{background:var(--navy-2)}
+.btab:nth-child(4){background:var(--cream)}
+.btab:nth-child(4).on{background:var(--navy-2)}
+
+/* page header */
+.ph{border:1.6px solid #3a3f48;border-radius:7px;text-align:center;font-family:var(--en-sc);letter-spacing:.2em;font-size:17px;padding:4px 10px;background:rgba(255,255,255,.7);margin:0 0 22px}
+.ph .z{font-family:var(--zh-hand);letter-spacing:.12em;margin-right:6px;font-size:16px}
+.pfoot{text-align:center;font-family:var(--en-sc);letter-spacing:.16em;font-size:14px;color:#3a3f48;margin-top:34px}
+.pfoot .z{font-family:var(--zh-hand);letter-spacing:.06em;font-size:13px;color:var(--ink-soft);display:block}
+.pfoot a{color:var(--ink-soft);font-family:var(--body);letter-spacing:0;font-size:12px}
+
+/* ================= STICKER CARDS ================= */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 24px;align-items:start}
+.span2{grid-column:1/-1}
+.card{position:relative;border-radius:24px;padding:18px 20px 18px;border:3.5px solid #fff;
+  box-shadow:0 0 0 1px rgba(40,50,70,.05),0 5px 14px rgba(40,55,80,.13)}
+.card.blue{background:var(--blue)}
+.card.yellow{background:var(--yellow)}
+.card.cream{background:var(--cream)}
+.card.navy{background:var(--navy);color:#fff}
+.card.navy .en,.card.navy .sub{color:#c9d6e6}
+.card.plain{background:transparent;border:0;box-shadow:none;padding:4px 2px}
+.tilt-l{transform:rotate(-.6deg)}.tilt-r{transform:rotate(.6deg)}
+
+.ct{font-family:var(--zh-hand);font-size:21px;line-height:1.35;letter-spacing:.04em;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.ct .num{font-family:var(--en-hand);font-size:24px;opacity:.55}
+.ct .en{font-family:var(--en-sc);font-size:16px;letter-spacing:.1em;text-transform:uppercase}
+.sub{font-size:13px;color:var(--ink-soft);margin:4px 0 12px;line-height:1.6}
+.sub .en{font-size:14px}
+.plain .ct{font-family:var(--en-hand);font-size:22px;letter-spacing:0}
+.plain .ct .zh{font-family:var(--zh-hand);font-size:19px}
+
+textarea,input[type=text]{width:100%;border:0;outline:0;font:inherit;color:var(--ink);resize:vertical}
+textarea{min-height:92px;border-radius:16px;padding:6px 14px;line-height:30px;font-size:15px;
+  background-color:rgba(255,255,255,.78);
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 29px,rgba(56,80,111,.12) 29px,rgba(56,80,111,.12) 30px);
+  background-position:0 6px;background-attachment:local}
+textarea::placeholder,input::placeholder{color:#a8aebb;font-family:var(--en-hand),var(--zh-hand);font-size:15px}
+.navy textarea{background-color:rgba(255,255,255,.12);color:#fff;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 29px,rgba(255,255,255,.14) 29px,rgba(255,255,255,.14) 30px)}
+.navy textarea::placeholder{color:#9fb1c8}
+.plain textarea{background-color:transparent;border-radius:0;padding:0 4px 0 22px;
+  background-image:radial-gradient(circle at 6px 15px,var(--ink) 1.6px,transparent 2px),repeating-linear-gradient(to bottom,transparent 0,transparent 29px,#ddd3c2 29px,#ddd3c2 30px);
+  background-size:100% 30px,100% 30px;background-repeat:repeat;min-height:150px}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.chip{border:0;background:#fff;border-radius:999px;padding:4px 13px;font-family:var(--zh-hand);font-size:14px;color:var(--ink);cursor:pointer;transition:.15s;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.chip .en{font-size:13px;margin-left:4px}
+.chip:hover{transform:translateY(-1px)}
+.chip.on{background:var(--navy-2);color:#fff}
+.chip.on .en{color:#c9d6e6}
+.navy .chip{background:rgba(255,255,255,.92)}
+.navy .chip.on{background:var(--yellow);color:var(--navy-2)}
+.navy .chip.on .en{color:#6b5f3a}
+.mini{font-size:12px;color:var(--ink-soft);margin:-4px 0 6px}
+.navy .mini{color:#b9c8da}
+
+/* window sticker (day header) */
+.win{padding:0;overflow:hidden;background:var(--yellow);align-self:stretch;display:flex;flex-direction:column}
+.win .body{flex:1;display:flex;flex-direction:column}
+.win .foot{margin-top:auto;padding-top:14px;display:flex;gap:14px;align-items:center;opacity:.9}
+.win .bar{background:var(--blue);height:52px;display:flex;align-items:center;gap:16px;padding:0 18px;border-bottom:3px solid #fff}
+.win .bar2{background:var(--navy);height:20px;display:flex;align-items:center;padding:0 12px}
+.win .body{padding:16px 20px 18px;position:relative}
+.bigday{font-family:var(--zh-hand);font-size:44px;line-height:1.05;color:var(--navy-2)}
+.bigday .en{font-family:var(--en-sc);font-size:22px;color:var(--navy);letter-spacing:.12em;margin-left:6px}
+.win .line{font-family:var(--zh-hand);font-size:17px;line-height:1.55;margin-top:10px;color:var(--ink)}
+.win .date{font-family:var(--en-hand);font-size:15px;color:#7d6c40}
+
+.pill-in{display:inline-block;background:#fff;border-radius:10px;padding:0 12px;margin:0 4px;font-family:var(--en-hand);font-size:24px;line-height:1.3}
+.today .t{font-family:var(--en-sc);font-size:21px;letter-spacing:.08em;line-height:1.5;color:var(--navy-2)}
+.today .t .z{font-family:var(--zh-hand);letter-spacing:.04em}
+.today .themes{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.today .themes span{font-family:var(--en-hand);font-size:14px;background:rgba(255,255,255,.75);border-radius:999px;padding:0 10px;color:var(--navy)}
+.reward .t{font-family:var(--zh-hand);font-size:18px;text-align:center;color:var(--navy-2);letter-spacing:.06em}
+.reward .t .en{display:block;font-family:var(--en-sc);font-size:15px;letter-spacing:.12em;color:#7d6c40;margin-top:-2px}
+.reward input{background:#fff;border-radius:999px;text-align:center;padding:8px 14px;margin-top:10px;font-family:var(--en-hand),var(--zh-hand);font-size:17px}
+
+.gotthis{display:inline-flex;align-items:center;gap:8px;background:var(--navy-2);color:#fff;font-family:var(--zh-hand);font-size:20px;letter-spacing:.08em;
+  border-radius:16px;padding:8px 22px;border:3px solid #fff;box-shadow:0 5px 14px rgba(40,55,80,.18);position:relative;transform:rotate(-2deg)}
+.gotthis .en{color:#c9d6e6;font-family:var(--en-sc);font-size:15px}
+
+/* myself card */
+.me{display:flex;gap:16px;align-items:flex-start}
+.me .av{width:46px;height:46px;border-radius:50%;background:#fff;flex:none;display:grid;place-items:center}
+.me .nm{font-family:var(--en-hand);font-size:20px;line-height:1.1}
+.me .nm span{color:var(--yellow);font-size:17px;margin-left:4px}
+.me .msg{font-family:var(--zh-hand);font-size:22px;line-height:1.45;margin-top:8px;letter-spacing:.03em}
+.me .msg .en{display:block;font-family:var(--en-hand);font-size:17px;color:#c9d6e6;letter-spacing:0}
+.btn{border:0;border-radius:999px;padding:10px 24px;font-family:var(--zh-hand);font-size:18px;letter-spacing:.08em;cursor:pointer;background:var(--yellow);color:var(--navy-2);transition:.18s;box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.15)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn.white{background:#fff}
+.btn.navy{background:var(--navy-2);color:#fff}
+.btn.ghost{background:transparent;color:var(--navy);box-shadow:none;border:2px dashed var(--blue)}
+.saved{font-family:var(--en-hand);font-size:15px;color:#c9d6e6;opacity:0;transition:.4s;margin-left:10px}
+.saved.show{opacity:1}
+.actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:16px}
+
+/* section divider */
+.sect{display:flex;align-items:center;gap:14px;margin:44px 0 18px}
+.sect .lab{background:var(--navy-2);color:#fff;font-family:var(--en-sc);letter-spacing:.16em;font-size:16px;border-radius:12px;padding:4px 16px;border:3px solid #fff;box-shadow:0 4px 10px rgba(40,55,80,.15)}
+.sect .lab .z{font-family:var(--zh-hand);letter-spacing:.06em;margin-left:8px}
+.sect:after{content:"";flex:1;border-top:2px dashed var(--blue)}
+.intro{font-family:var(--zh-hand);font-size:17px;line-height:1.7;margin:0 0 16px;letter-spacing:.02em}
+.intro .en{display:block;font-size:15px}
+
+/* look back notes */
+.notes{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.notecard{border-radius:16px;padding:12px 12px 10px;border:3px solid #fff;box-shadow:0 4px 10px rgba(40,55,80,.12);font-size:13px;line-height:1.55;cursor:pointer;transition:.2s;min-height:140px}
+.notecard:nth-child(odd){transform:rotate(-1.2deg)}.notecard:nth-child(even){transform:rotate(1deg)}
+.notecard:hover{transform:rotate(0) translateY(-2px)}
+.notecard h4{margin:0 0 4px;font-family:var(--zh-hand);font-weight:400;font-size:16px;color:var(--navy-2)}
+.notecard .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.notecard .tags span{background:rgba(255,255,255,.8);border-radius:999px;padding:0 7px;font-family:var(--zh-hand);font-size:11.5px}
+.notecard .full{display:none;margin-top:6px}
+.notecard.open{grid-column:1/-1;transform:none;min-height:0}
+.notecard.open .full{display:block}
+.notecard .full dt{font-family:var(--zh-hand);color:var(--navy);margin-top:6px}
+.notecard .full dd{margin:0;white-space:pre-wrap}
+.c-blue{background:var(--blue)}.c-yellow{background:var(--yellow)}.c-cream{background:var(--cream)}.c-blue2{background:var(--blue-2)}.c-yellow2{background:var(--yellow-2)}
+
+/* capsule */
+.paths{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:6px 0 22px}
+.path{text-align:left;cursor:pointer;font:inherit;color:inherit;transition:.2s}
+.path:hover{transform:translateY(-2px) rotate(0)}
+.path.on{outline:3px solid var(--navy-2);outline-offset:3px}
+.path .ico{height:46px}
+.path b{display:block;font-family:var(--zh-hand);font-weight:400;font-size:19px;margin-top:6px}
+.path .en{display:block;font-size:15px}
+.path p{margin:6px 0 0;font-size:13px;line-height:1.55;color:var(--ink-soft)}
+.letter{background:#fffdf7;padding:28px 30px 22px}
+.letter .stamp{position:absolute;right:22px;top:-18px;width:74px;height:86px;background:var(--yellow);border-radius:6px;transform:rotate(6deg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--en-sc);color:var(--navy-2);font-size:14px;line-height:1.1;letter-spacing:.06em;text-align:center;
+  border:3px solid #fff;box-shadow:0 4px 10px rgba(40,55,80,.15);}
+.letter .stamp svg{margin-bottom:4px}
+.letter .greet{font-family:var(--zh-hand);font-size:22px;background:transparent;padding:0;width:72%}
+.letter .greet-en{font-family:var(--en-hand);font-size:16px;color:var(--ink-soft);margin:0 0 12px}
+.letter textarea{background-color:transparent;border-radius:0;padding:0 2px;min-height:440px;font-size:16px;line-height:34px;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 33px,#e6dccb 33px,#e6dccb 34px);background-position:0 0}
+.letter .sign{text-align:right}
+.letter .sign input{text-align:right;font-family:var(--zh-hand);font-size:20px;background:transparent;width:260px;max-width:100%}
+.letter .meta{text-align:right;font-family:var(--en-hand);color:var(--ink-soft);font-size:14px}
+.sparks{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.spark{border:0;background:#fff;border-radius:999px;padding:4px 14px;font-family:var(--zh-hand);font-size:14px;color:var(--navy);cursor:pointer;box-shadow:0 2px 6px rgba(40,55,80,.1)}
+.spark:hover{background:var(--navy-2);color:#fff}
+.hint{font-family:var(--zh-hand);font-size:14px;color:var(--ink-soft);margin-top:18px}
+
+/* stickers */
+.stk{position:absolute;pointer-events:none;z-index:3}
+
+/* left page */
+.lp-date{font-family:var(--en-hand);font-size:20px;line-height:1}
+.lp-week{display:flex;gap:6px;margin:10px 0 18px}
+.lp-week span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-family:var(--en-sc);font-size:13px;color:var(--ink-soft)}
+.lp-week span.on{background:var(--navy-2);color:#fff}
+.lp-h{font-family:var(--en-hand);font-size:20px;margin:0 0 4px;color:var(--ink)}
+.lp-h .z{font-family:var(--zh-hand);font-size:15px;color:var(--ink-soft);margin-left:6px}
+.lp-list{list-style:none;margin:0 0 20px;padding:0}
+.lp-list li{border-bottom:1.5px solid #e2d9c9;padding:7px 2px 5px;font-size:13px;position:relative;display:flex;gap:8px;align-items:baseline}
+.lp-list li b{font-family:var(--zh-hand);font-weight:400;font-size:15px;min-width:52px;color:var(--navy-2)}
+.lp-list li .s{color:var(--ink-soft);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;flex:1}
+.lp-list li.cur{background:rgba(198,214,232,.45);border-radius:8px;padding-left:34px}
+.lp-box{border:2.5px solid var(--blue);border-radius:6px;height:60px;margin:-2px 0 8px;background:rgba(255,255,255,.5)}
+.pin{position:absolute;left:2px;top:-14px;width:32px;height:40px;z-index:4;pointer-events:none}
+.lp-tip{position:absolute;left:22px;right:22px;bottom:22px;transform:rotate(-2deg)}
+.lp-tip .card{padding:12px 14px}
+.lp-tip .t{font-family:var(--zh-hand);font-size:15px;line-height:1.5;color:var(--navy-2)}
+.lp-name{font-family:var(--en-sc);letter-spacing:.14em;font-size:12px;color:var(--ink-soft);margin-top:10px}
+
+/* cover */
+.page.covermode{padding:0;background:var(--cover)!important}
+.cover{min-height:760px;border-radius:22px;background:var(--cover);position:relative;display:flex;align-items:center;justify-content:center;padding:40px 20px;
+  background-image:radial-gradient(circle at 30% 20%,rgba(255,255,255,.06),transparent 50%)}
+.label{background:var(--page);border-radius:20px;padding:34px 40px 30px;max-width:560px;width:100%;border:4px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.25);position:relative;
+  background-image:radial-gradient(circle,var(--dot) 1.1px,transparent 1.4px);background-size:20px 20px}
+.label h1{font-family:var(--zh-hand);font-weight:400;font-size:38px;letter-spacing:.06em;margin:4px 0 0;color:var(--navy-2);line-height:1.2}
+.label .kick{font-family:var(--en-sc);letter-spacing:.2em;font-size:15px;color:var(--teal)}
+.label .sub2{font-family:var(--en-hand);font-size:20px;color:var(--ink-soft)}
+.label p{font-size:14.5px;line-height:1.8;margin:14px 0 0}
+.label p .en{display:block;font-size:15px}
+.label input{background:#fff;border-radius:999px;padding:10px 18px;font-family:var(--en-hand),var(--zh-hand);font-size:18px;margin-top:8px;box-shadow:inset 0 0 0 2px var(--blue)}
+.label input:focus{box-shadow:inset 0 0 0 2px var(--navy)}
+.badge{position:absolute;right:-26px;top:-30px;transform:rotate(8deg)}
+.badge .card{padding:10px 16px;text-align:center;font-family:var(--zh-hand);font-size:15px;line-height:1.35;color:var(--navy-2)}
+.badge .card .en{display:block;font-family:var(--en-sc);font-size:13px;letter-spacing:.1em}
+
+/* envelope */
+.env{width:240px;height:160px;margin:10px auto 26px;position:relative}
+.env .b{position:absolute;inset:0;background:var(--yellow);border-radius:14px;border:4px solid #fff;box-shadow:0 10px 26px rgba(40,55,80,.2)}
+.env .f{position:absolute;left:4px;right:4px;top:4px;height:0;border-left:116px solid transparent;border-right:116px solid transparent;border-top:90px solid #e9cf86;transform-origin:top;transform:rotateX(180deg);animation:close 1.1s .3s ease forwards}
+.env .s{position:absolute;left:50%;top:72px;width:46px;height:46px;margin-left:-23px;border-radius:50%;background:var(--navy-2);border:3px solid #fff;display:grid;place-items:center;opacity:0;animation:pop .45s 1.3s ease forwards}
+@keyframes close{to{transform:rotateX(0)}}
+@keyframes pop{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:scale(1)}}
+.center{text-align:center}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);background:var(--navy-2);color:#fff;padding:9px 22px;border-radius:999px;font-family:var(--zh-hand);font-size:16px;letter-spacing:.04em;opacity:0;transition:.35s;z-index:9;pointer-events:none;max-width:90vw;text-align:center;border:3px solid #fff}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.fade{animation:fade .45s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hidden{display:none!important}
+
+/* responsive */
+@media (max-width:1040px){.leftpage{display:none}.page{border-radius:22px}.btabs{left:30px}}
+@media (max-width:760px){
+  .desk{padding:10px 6px 30px}
+  .book{padding:8px 38px 46px 8px;border-radius:22px}
+  .page{padding:18px 16px 24px;border-radius:18px}
+  .grid{grid-template-columns:1fr;gap:18px}
+  .tabs{right:2px;top:22px;gap:5px}
+  .tab{width:34px;min-height:52px;font-size:13px;letter-spacing:.06em}
+  .tab.current,.tab.viewing{width:38px}
+  .btabs{left:14px;gap:5px}
+  .btab{padding:5px 12px 7px;font-size:13px;letter-spacing:.08em}
+  .btab .z{display:none}
+  .ph{font-size:13px;letter-spacing:.1em}
+  .phen{display:none}
+  .win .foot{display:none}
+  .win .bar{height:40px}
+  .notes{grid-template-columns:1fr 1fr}
+  .paths{grid-template-columns:1fr}
+  .letter{padding:24px 18px 18px}
+  .label{padding:28px 22px 24px}
+  .label h1{font-size:30px}
+  .badge{right:-6px;top:-34px}
+  .cover{min-height:620px}
+  .bigday{font-size:36px}
+  .spread{min-height:0}
+}
+</style>
+</head>
+<body>
+<div class="desk">
+  <div class="book">
+    <div class="spread">
+      <aside class="leftpage hidden" id="left"></aside>
+      <section class="page paper-dot" id="page"></section>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+    <nav class="btabs" id="btabs"></nav>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==========================================================
+   CONFIG
+   SUBMIT_URL: Google Apps Script 部署后的 /exec 网址；留空则只存在参与者浏览器里，可下载
+   网址加 ?preview=1 可跳过“隔天才开下一页”的限制（自己测试用）
+   网址加 ?id=代号 自动填好参与者代号
+   ========================================================== */
+const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbwA8XuDmNP9GqWHvzuAngS3x63KkpctmNIPgdn_3urj-bacEMySc942sQM1fTRqktAHLg/exec";
+
+/* ---------------- stickers (inline svg) ---------------- */
+const NAVY="#2d4260",YEL="#f2dc9c",BLU="#c6d6e8";
+const SVG={
+  squiggle:(w=60,c=NAVY)=>`<svg width="${w}" height="${w*.4}" viewBox="0 0 60 24"><path d="M3 14c6-12 10 8 16-2s10 8 16-2 10 8 16-2 6 2 6 2" fill="none" stroke="${c}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  loop:(w=46,c=NAVY)=>`<svg width="${w}" height="${w*.6}" viewBox="0 0 46 28"><path d="M3 22c8 0 9-17 17-17 6 0 6 9 0 9s-4-10 5-10c7 0 9 15 18 15" fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round"/></svg>`,
+  sparkle:(w=30,f=YEL)=>`<svg width="${w}" height="${w}" viewBox="0 0 30 30"><path d="M15 2c1.6 7 4 9.4 13 13-9 3.6-11.4 6-13 13-1.6-7-4-9.4-13-13 9-3.6 11.4-6 13-13z" fill="${f}" stroke="${NAVY}" stroke-width="2.4" stroke-linejoin="round"/></svg>`,
+  heart:(w=26,f="#e9a99a")=>`<svg width="${w}" height="${w}" viewBox="0 0 26 26"><path d="M13 22S3 15.5 3 9.2C3 6 5.4 4 8 4c2.2 0 3.8 1.3 5 3 1.2-1.7 2.8-3 5-3 2.6 0 5 2 5 5.2C23 15.5 13 22 13 22z" fill="${f}" stroke="${NAVY}" stroke-width="2.2" stroke-linejoin="round"/></svg>`,
+  cursor:(w=34)=>`<svg width="${w}" height="${w*1.2}" viewBox="0 0 34 40"><path d="M5 3l24 15-11 2.5 6.5 12.5-5 2.5-6.5-12.6L5 30z" fill="#f6efe2" stroke="#fff" stroke-width="7" stroke-linejoin="round"/><path d="M5 3l24 15-11 2.5 6.5 12.5-5 2.5-6.5-12.6L5 30z" fill="#f6efe2" stroke="${NAVY}" stroke-width="2.4" stroke-linejoin="round"/></svg>`,
+  lock:(c=NAVY)=>`<svg width="22" height="24" viewBox="0 0 22 24"><rect x="3" y="10" width="16" height="12" rx="3" fill="none" stroke="${c}" stroke-width="2.6"/><path d="M7 10V7a4 4 0 018 0v3" fill="none" stroke="${c}" stroke-width="2.6"/></svg>`,
+  warn:(c=NAVY)=>`<svg width="24" height="22" viewBox="0 0 24 22"><path d="M12 3l9.5 16.5h-19z" fill="none" stroke="${c}" stroke-width="2.6" stroke-linejoin="round"/><path d="M12 9v5M12 17v.2" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/></svg>`,
+  moon:(w=70)=>`<svg width="${w}" height="${w}" viewBox="0 0 70 70"><path d="M46 8a26 26 0 1016 38A22 22 0 0146 8z" fill="${YEL}" stroke="#fff" stroke-width="7" stroke-linejoin="round"/><path d="M46 8a26 26 0 1016 38A22 22 0 0146 8z" fill="${YEL}" stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round"/><circle cx="28" cy="38" r="2.2" fill="${NAVY}"/><circle cx="40" cy="40" r="2.2" fill="${NAVY}"/><path d="M31 46c2 2 5 2 7 0" fill="none" stroke="${NAVY}" stroke-width="2.2" stroke-linecap="round"/></svg>`,
+  house:(w=46)=>`<svg width="${w}" height="${w}" viewBox="0 0 46 46"><path d="M6 22L23 7l17 15v17H6z" fill="${YEL}" stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round"/><rect x="18" y="27" width="10" height="12" rx="2" fill="#fff" stroke="${NAVY}" stroke-width="2.4"/><path d="M31 10v6" stroke="${NAVY}" stroke-width="2.6" stroke-linecap="round"/></svg>`,
+  lamp:(w=46)=>`<svg width="${w}" height="${w}" viewBox="0 0 46 46"><path d="M34 8a14 14 0 108 22A12 12 0 0134 8z" fill="${BLU}" stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="2" fill="${NAVY}"/><circle cx="40" cy="38" r="1.8" fill="${NAVY}"/></svg>`,
+  mail:(w=46)=>`<svg width="${w}" height="${w}" viewBox="0 0 46 46"><rect x="5" y="11" width="36" height="25" rx="5" fill="#fff" stroke="${NAVY}" stroke-width="2.6"/><path d="M7 14l16 12 16-12" fill="none" stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round"/></svg>`,
+  face:(w=34)=>`<svg width="${w}" height="${w}" viewBox="0 0 34 34"><circle cx="13" cy="15" r="6" fill="${YEL}" stroke="${NAVY}" stroke-width="2.2"/><circle cx="13" cy="15" r="2" fill="${NAVY}"/><path d="M21 20c2 1.5 5 1.5 7 0" fill="none" stroke="${NAVY}" stroke-width="2.2" stroke-linecap="round"/></svg>`,
+  pin:()=>`<svg class="pin" viewBox="0 0 62 76"><path d="M31 72S8 46 8 30a23 23 0 0146 0c0 16-23 42-23 42z" fill="#fff"/><path d="M31 68S12 45 12 30a19 19 0 0138 0c0 15-19 38-19 38z" fill="${BLU}" stroke="${NAVY}" stroke-width="2.4"/><circle cx="31" cy="29" r="10" fill="#fff" stroke="${NAVY}" stroke-width="2.4"/><circle cx="31" cy="29" r="3.5" fill="${NAVY}"/></svg>`,
+  check:(c="#fff")=>`<svg width="22" height="22" viewBox="0 0 22 22"><path d="M4 11.5l4.5 4.5L18 6" fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+};
+const stk=(svg,style)=>`<span class="stk" style="${style}">${svg}</span>`;
+
+/* ---------------- content ---------------- */
+const THEMES=["care & autonomy","conflict & repair","household labor","family boundaries","trust","follow-through","compromise"];
+const DAILY=[
+  {id:"happened",zh:"What happened?",en:"",subZh:"Briefly describe what you observed.",subEn:"",ph:"e.g. We went grocery shopping and disagreed about what to buy...",card:"blue span2"},
+  {id:"reaction",zh:"My first reaction",en:"",subZh:"What did I feel or think?",subEn:"",ph:"The first thought that came up, even if it feels a bit strange",card:"yellow tilt-l"},
+  {id:"meaning",zh:"What did it mean to me?",en:"",subZh:"Care, control, compromise, respect, distance, or something else? What shaped that meaning?",subEn:"",
+    chips:[["Care",""],["Control",""],["Compromise",""],["Respect",""],["Distance",""],["Companionship",""],["Something else",""]],multi:true,ph:"What shaped that meaning?",card:"cream tilt-r"},
+  {id:"respond",zh:"how did we respond",en:"",subZh:"What did each of us do? Did anything change?",subEn:"",ph:"What you did, what they did, what happened after",card:"plain span2"},
+  {id:"marriage",zh:"What did I think about marriage?",en:"",subZh:"More reassured, more uncertain, or unchanged? Why?",subEn:"",
+    chips:[["More reassured",""],["More uncertain",""],["Unchanged",""],["Not sure",""]],ph:"Why?",card:"navy"},
+  {id:"choice",zh:"Choice or momentum?",en:"",subZh:"Did I feel I was choosing or just drifting along?",subEn:"",
+    chips:[["Choosing",""],["Drifting along",""],["Not sure",""]],ph:"Add a line if you like, or leave it blank",card:"yellow tilt-r"}
+];
+const AFTER=[
+  {id:"a1",zh:"Across the five days, what kinds of moments most affected how I imagined marriage with this person?",en:"",card:"blue span2"},
+  {id:"a2",zh:"Did the same kind of behavior feel like care in one moment and control or pressure in another? What changed the meaning?",en:"",card:"yellow tilt-l"},
+  {id:"a3",zh:"Which moments made me feel that I was actively choosing this relationship? Which made me feel I was moving forward by habit, pressure, or lack of alternatives?",en:"",card:"cream tilt-r"},
+  {id:"a4",zh:"What concerns about everyday life, family, trust, or future responsibilities became clearer? Which remain unresolved?",en:"",card:"navy"},
+  {id:"a5",zh:"What would I need to understand, discuss, or see consistently before I could make a marriage decision with less fear of regret?",en:"",card:"blue tilt-l"}
+];
+const PATHS={
+  married:{ico:SVG.house(),zh:"Me, ten years into marriage",en:"",p:"You married someone, and ten years have passed. Write to yourself today, from that home.",greet:"Dear Younger Me,",greetEn:"",sign:"Yourself, ten years later",stamp:"10 YRS<br>LATER",card:"yellow tilt-l"},
+  single:{ico:SVG.lamp(),zh:"Me at forty, unmarried",en:"",p:"You never married, and now you're forty. Write to yourself today, from a room that is entirely yours.",greet:"Dear Younger Me,",greetEn:"",sign:"Yourself, at forty",stamp:"AT<br>FORTY",card:"blue tilt-r"},
+  other:{ico:SVG.mail(),zh:"Another future",en:"",p:"Maybe it looks different. Start by telling your present self what kind of future you're writing from.",greet:"Dear Younger Me,",greetEn:"",sign:"Your future self",stamp:"FROM<br>LATER",card:"cream"}
+};
+const SPARKS=["What does home look like on the night you write this?","Who is around you then, or who isn't?","What small thing turned out to matter more than you thought?","What are you glad about? What do you regret?","Do you have regrets? Which part?","What do you most want your present self to pay attention to?","Which moment from these five days looks different from where you are?"];
+const DAYNAMES=["Day 1","Day 2","Day 3","Day 4","Day 5"];
+const DAYLINES=["Starting today. Even something very small counts.","Does yesterday's moment still come back to you today?","Halfway there. You might be noticing moments you used to miss.","An ordinary day counts too. Nothing happening is also a situation.","Last day. After today's page, look back, then open the time capsule."];
+const MYSELF=[
+  ["I'm looking at myself honestly today.",""],
+  ["No rush for answers.",""],
+  ["What I notice counts.",""],
+  ["Ordinary days are worth writing down.",""],
+  ["I'm choosing, for me.",""]
+];
+const PAPERS=[["dot","DOT",""],["grid","GRID",""],["lined","LINED",""],["blank","BLANK",""]];
+
+/* ---------------- state ---------------- */
+const params=new URLSearchParams(location.search);
+/* 每个参与者用自己的专属链接 ?id=代号：代号会被锁定，本地存储也按代号分开，
+   同一台电脑打开不同人的链接，内容互不覆盖 */
+const URL_ID=(params.get("id")||"").trim();
+const STORE_KEY="mdm-diary-v1"+(URL_ID?":"+URL_ID:"");
+const PREVIEW=params.get("preview")==="1";
+let S=load();let viewing=null;
+function blank(){return{pid:"",startedAt:null,paper:"dot",days:{},after:{},capsule:{path:"",greet:"",body:"",sign:""},sealed:false,sealedAt:null}}
+function load(){try{const r=localStorage.getItem(STORE_KEY);if(r)return Object.assign(blank(),JSON.parse(r))}catch(e){}return blank()}
+let st=null;
+function save(quiet){try{localStorage.setItem(STORE_KEY,JSON.stringify(S))}catch(e){}
+  if(!quiet){const el=document.getElementById("saved");if(el){el.classList.add("show");clearTimeout(st);st=setTimeout(()=>el.classList.remove("show"),1400)}}}
+function today(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+const MONTHS=["january","february","march","april","may","june","july","august","september","october","november","december"];
+function enDate(s){const [y,m,d]=s.split("-");return `${MONTHS[+m-1]} ${+d}`}
+function shortDate(s){if(!s)return"";const [,m,d]=s.split("-");return `${+m}/${+d}`}
+function day(n){if(!S.days[n])S.days[n]={fields:{},chips:{},done:false,doneDate:null};return S.days[n]}
+function isUnlocked(n){if(n===1)return true;const p=S.days[n-1];if(!p||!p.done)return false;if(PREVIEW)return true;return today()>p.doneDate}
+function currentDay(){for(let n=1;n<=5;n++){if(!(S.days[n]&&S.days[n].done))return n}return 5}
+function esc(s){return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600)}
+
+/* ---------------- submit ---------------- */
+function send(kind,payload){
+  if(!SUBMIT_URL)return Promise.resolve(false);
+  const body=JSON.stringify(Object.assign({kind,pid:S.pid,clientTime:new Date().toISOString()},payload));
+  return fetch(SUBMIT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body}).then(()=>true).catch(()=>false);
+}
+function dailyPayload(n){const d=day(n),o={day:n,date:d.doneDate,reward:d.fields.reward||""};
+  DAILY.forEach(q=>{o[q.id]=d.fields[q.id]||"";if(q.chips)o[q.id+"_tags"]=(d.chips[q.id]||[]).join(" / ")});return o}
+
+/* ---------------- chrome: tabs, bottom tabs, left page ---------------- */
+function renderTabs(){
+  const box=document.getElementById("tabs");const cur=currentDay();
+  let h="";
+  for(let n=1;n<=5;n++){
+    const d=S.days[n],done=d&&d.done,un=isUnlocked(n);
+    const showing=S.pid&&(viewing===n||(viewing===null&&!S.sealed&&n===cur&&un));
+    const cls=showing?"viewing":done?"done":!un?"locked":"";
+    h+=`<button class="tab ${cls}" data-n="${n}" title="${DAYNAMES[n-1]}">DAY ${n}${done?`<span class="ck">✓</span>`:""}</button>`;
+  }
+  const lUn=isUnlocked(5);
+  h+=`<button class="tab letter ${lUn?"":"locked"}" data-n="letter" title="Time capsule">LETTER</button>`;
+  box.innerHTML=h;
+  box.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
+    if(!S.pid){toast("Write your name on the cover first");return}
+    const k=b.dataset.n;
+    if(k==="letter"){if(!lUn){toast("The time capsule opens on Day 5");return}viewing=5;render();setTimeout(()=>{const el=document.getElementById("capsule");if(el)el.scrollIntoView({behavior:"smooth"})},300);return}
+    const n=+k,d=S.days[n];
+    if(isUnlocked(n)||(d&&d.done)){viewing=n;render()}
+    else toast(n===cur?"Today's page is done. Come back tomorrow":"Finish the earlier days first");
+  });
+}
+function renderBtabs(){
+  const b=document.getElementById("btabs");
+  b.innerHTML=PAPERS.map(([k,en,z])=>`<button class="btab ${S.paper===k?"on":""}" data-k="${k}">${en}</button>`).join("");
+  b.querySelectorAll(".btab").forEach(x=>x.onclick=()=>{S.paper=x.dataset.k;save(true);applyPaper();renderBtabs()});
+}
+function applyPaper(){const p=document.getElementById("page");p.className=p.className.replace(/paper-\w+/g,"").trim()+" paper-"+(S.paper||"dot")}
+function renderLeft(){
+  const L=document.getElementById("left");
+  if(!S.pid){L.classList.add("hidden");document.getElementById("page").classList.add("solo");return}
+  L.classList.remove("hidden");document.getElementById("page").classList.remove("solo");
+  const t=today(),wd=new Date().getDay(),cur=currentDay();
+  const wk=["S","M","T","W","T","F","S"].map((c,i)=>`<span class="${i===wd?"on":""}">${c}</span>`).join("");
+  let list="";
+  for(let n=1;n<=5;n++){
+    const d=S.days[n]||{fields:{}};const isCur=!S.sealed&&n===cur;
+    list+=`<li class="${isCur?"cur":""}">${isCur?SVG.pin():""}<b>${DAYNAMES[n-1]}</b><span class="s">${d.done?esc(d.fields.happened):(isCur?"today":"")}</span>${d.done?`<span style="color:var(--teal)">${shortDate(d.doneDate)}</span>`:""}</li>`;
+  }
+  const rewards=[1,2,3,4,5].map(n=>(S.days[n]&&S.days[n].fields.reward)||"").filter(Boolean);
+  L.innerHTML=`<div class="lp-date">${enDate(t)}</div>
+    <div class="lp-week">${wk}</div>
+    <div class="lp-h">five days</div>
+    <ul class="lp-list">${list}</ul>
+    <div class="lp-h">little rewards</div>
+    <ul class="lp-list">${rewards.length?rewards.map(r=>`<li><span class="s">♡ ${esc(r)}</span></li>`).join(""):`<li><span class="s" style="font-family:var(--en-hand)">…</span></li>`}</ul>
+    <div class="lp-tip"><div class="card yellow"><div class="t">Today, I took an honest<br>look at myself.</div></div>
+    <div class="lp-name">${esc(S.pid)}'s diary</div></div>`;
+}
+
+/* ---------------- render router ---------------- */
+function render(){
+  renderTabs();renderBtabs();renderLeft();applyPaper();
+  const P=document.getElementById("page");
+  P.classList.toggle("covermode",!S.pid);
+  if(!S.pid){P.innerHTML=coverPage();bindCover();return}
+  if(S.sealed&&viewing===null){P.innerHTML=finishedPage();bindFinished();return}
+  const n=viewing||currentDay();
+  if(!isUnlocked(n)){P.innerHTML=waitingPage(n);bindWaiting();return}
+  P.innerHTML=dayPage(n);bindDay(n);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+const header=()=>`<div class="ph">MARRIAGE DECISION MOMENTS<span class="phen"> · A FIVE-DAY DIARY</span></div>`;
+const footer=()=>`<div class="pfoot">NOTICE · RECORD · LOOK BACK · WRITE A LETTER<a href="#" id="dlFoot" style="display:block;margin-top:4px">Download what I've written so far</a>${PREVIEW?`<a href="#" id="reset" style="display:block">Start over (preview)</a>`:""}</div>`;
+function bindFooter(){
+  const a=document.getElementById("dlFoot");if(a)a.onclick=e=>{e.preventDefault();download()};
+  const r=document.getElementById("reset");if(r)r.onclick=e=>{e.preventDefault();S=blank();save(true);viewing=null;render()};
+}
+
+/* ---- cover ---- */
+function coverPage(){
+  const pre=URL_ID;
+  return `<div class="cover fade">
+    ${stk(SVG.sparkle(40),"left:12%;top:14%")}${stk(SVG.squiggle(80,"#c6d6e8"),"right:14%;top:12%")}${stk(SVG.heart(30),"left:16%;bottom:16%")}${stk(SVG.loop(60,YEL),"right:12%;bottom:18%")}
+    <div class="label">
+      <div class="badge"><div class="card yellow">5 days · 5 moments<br>1 letter</div></div>
+      <div class="kick">A FIVE-DAY DIARY</div>
+      <h1>Marriage Decision Moments</h1>
+      <p>Thank you for taking part in this interview. For the next five days, take about ten minutes a day to record one interaction that affects how you think about choosing marriage. Describe what happened and how you understood it, without forcing a conclusion.</p>
+      <p>On Day 5, you'll look back over the five days, then open a <b>reversed time capsule</b>: a letter written by your future self, back to you now.</p>
+      <p style="font-size:13px;color:var(--ink-soft)">Everything saves automatically in this browser, so please come back on the same device. Each new page opens the day after you finish the last one.</p>
+      <div style="margin-top:18px;font-family:var(--zh-hand);font-size:19px;color:var(--navy-2)">this diary belongs to</div>
+      <input type="text" id="pid" value="${esc(pre)}" placeholder="your name, nickname, or invitation code" maxlength="40" ${pre?"readonly":""}>
+      <div class="actions"><button class="btn navy" id="start">Open Day 1 →</button></div>
+    </div>
+  </div>`;
+}
+function bindCover(){
+  const i=document.getElementById("pid"),b=document.getElementById("start");
+  const chk=()=>b.disabled=!i.value.trim();chk();i.oninput=chk;
+  i.onkeydown=e=>{if(e.key==="Enter"&&i.value.trim())b.click()};
+  b.onclick=()=>{S.pid=i.value.trim();S.startedAt=new Date().toISOString();save(true);send("start",{});viewing=null;render()};
+}
+
+/* ---- waiting ---- */
+function waitingPage(n){
+  return `${header()}<div class="fade center" style="padding:40px 0 10px">
+    <div style="position:relative;display:inline-block">${SVG.moon(110)}${stk(SVG.sparkle(26),"right:-30px;top:0")}${stk(SVG.sparkle(18,BLU),"left:-26px;bottom:10px")}</div>
+    <div style="max-width:440px;margin:24px auto 0" class="grid">
+      <div class="card blue span2 tilt-l"><div class="ct" style="justify-content:center">Today's page is done</div>
+      <div class="intro" style="margin:10px 0 0;font-size:16px">${DAYNAMES[n-1]} opens tomorrow. Live the rest of today as usual, and notice the small moments that make you pause.</div></div>
+    </div>
+    <div class="actions" style="justify-content:center;margin-top:26px"><button class="btn ghost" id="back">Look at today's page again</button></div>
+  </div>${footer()}`;
+}
+function bindWaiting(){document.getElementById("back").onclick=()=>{viewing=currentDay()-1;render()};bindFooter()}
+
+/* ---- question card ---- */
+function qCard(q,i,store,chipStore,attr){
+  let chips="";
+  if(q.chips){const sel=(chipStore&&chipStore[q.id])||[];
+    chips=`<div class="chips" data-q="${q.id}" data-multi="${q.multi?1:0}">${q.chips.map(([z,e])=>`<button type="button" class="chip${sel.includes(z)?" on":""}" data-v="${z}">${z}${e?`<span class="en">${e}</span>`:""}</button>`).join("")}</div>${q.multi?`<div class="mini">pick as many as you like</div>`:""}`}
+  const plain=q.card.includes("plain");
+  const deco={reaction:stk(SVG.squiggle(46),"right:18px;top:-14px"),marriage:stk(SVG.sparkle(30),"right:-10px;top:-14px"),happened:stk(SVG.loop(50),"right:22px;top:-12px"),choice:stk(SVG.heart(26),"left:-10px;bottom:-10px")}[q.id]||"";
+  return `<div class="card ${q.card}">${deco}
+    <div class="ct">${plain?`<span>${q.zh}</span>`:`<span class="num">${i}</span>${q.zh}${q.en?`<span class="en">${q.en}</span>`:""}`}</div>
+    ${q.subZh?`<div class="sub">${q.subZh}</div>`:`<div style="height:10px"></div>`}
+    ${chips}<textarea ${attr}="${q.id}" placeholder="${q.ph||"Take your time"}">${esc(store[q.id])}</textarea>
+  </div>`;
+}
+
+/* ---- day page ---- */
+function dayPage(n){
+  const d=day(n);const dt=d.doneDate||today();
+  const [mz,me]=MYSELF[n-1];
+  let h=`${header()}<div class="fade">
+  <div class="grid">
+    <div class="card win tilt-l" style="grid-row:span 2">
+      <div class="bar">${SVG.lock()}${SVG.squiggle(44)}${SVG.warn()}</div>
+      <div class="bar2">${SVG.loop(30,"#c6d6e8")}</div>
+      <div class="body">
+        ${stk(SVG.face(44),"right:16px;top:12px")}
+        <div class="date">${enDate(dt)}${d.done?" · written":""}</div>
+        <div class="bigday">Day ${n}<span class="en">of five</span></div>
+        <div class="line">${DAYLINES[n-1]}</div>
+        <div class="foot">${SVG.sparkle(22)}${SVG.squiggle(40)}${SVG.heart(20)}</div>
+      </div>
+    </div>
+    <div class="card blue today tilt-r">
+      <div class="t">TODAY, I WILL NOTICE<br>ONE <span class="pill-in">1</span> SMALL MOMENT</div>
+      <div class="themes">${THEMES.map(t=>`<span>${t}</span>`).join("")}</div>
+    </div>
+    <div class="card yellow reward tilt-l">
+      <div class="t">I WILL REWARD MYSELF WITH:</div>
+      <input type="text" data-f="reward" value="${esc(d.fields.reward)}" placeholder="a hot cocoa, a walk...">
+    </div>
+  </div>
+  <div style="margin:26px 0 22px 10px;position:relative;display:inline-block">
+    ${stk(SVG.squiggle(36),"left:-14px;top:-18px")}<span class="gotthis">TAKE YOUR TIME</span>${stk(SVG.cursor(30),"right:-18px;bottom:-24px")}
+  </div>
+  <div class="grid">${DAILY.map((q,i)=>qCard(q,i+1,d.fields,d.chips,"data-f")).join("")}</div>`;
+
+  if(n===5){
+    h+=`<div class="sect"><span class="lab">AFTER FIVE DAYS</span></div>
+    <p class="intro">Look back at your five days and notice how your judgment formed and changed. You can write down contradictions, and you can leave questions without answers.</p>
+    <div class="notes">${[1,2,3,4,5].map(k=>{const dd=S.days[k]||{fields:{},chips:{}};const f=dd.fields,c=dd.chips||{};
+      const tags=[...(c.meaning||[]),...(c.marriage||[]),...(c.choice||[])];
+      return `<div class="notecard ${["c-blue","c-yellow","c-cream","c-blue2","c-yellow2"][k-1]}" data-k="${k}">
+        <h4>${DAYNAMES[k-1]}${dd.doneDate?` <span class="en" style="font-size:13px">${shortDate(dd.doneDate)}</span>`:""}</h4>
+        <div>${esc(f.happened)||"<span class='en'>(not written yet)</span>"}</div>
+        <div class="tags">${tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>
+        <dl class="full">${DAILY.slice(1).map(q=>`<dt>${q.zh}</dt><dd>${esc(f[q.id])||"…"}</dd>`).join("")}</dl>
+      </div>`}).join("")}</div>
+    <div class="grid">${AFTER.map((q,i)=>qCard(Object.assign({subZh:"",subEn:"",ph:"Take your time"},q),i+1,S.after,null,"data-a")).join("")}</div>
+
+    <div class="sect" id="capsule"><span class="lab">REVERSED TIME CAPSULE</span></div>
+    <p class="intro">A usual time capsule is written by you now, for the future. This one runs the other way. Imagine you've already arrived somewhere in the future, and write a letter from there, back to the you who is still deciding. Neither path is the right answer, and it doesn't need to be beautiful. One specific evening in that future is plenty.</p>
+    <div class="paths">${["married","single","other"].map(k=>{const p=PATHS[k];return `<button type="button" class="card path ${p.card}${S.capsule.path===k?" on":""}" data-p="${k}"><div class="ico">${p.ico}</div><b>${p.zh}</b><p>${p.p}</p></button>`}).join("")}</div>
+    <div id="letterWrap">${letter()}</div>`;
+  }
+
+  h+=`<div class="card navy" style="margin-top:34px;max-width:${n===5?"100%":"520px"};margin-left:auto">
+      ${stk(SVG.sparkle(28),"left:-12px;top:-14px")}
+      <div class="me"><div class="av">${SVG.face(36)}</div>
+        <div style="flex:1"><div class="nm">Myself<span>@notetoself</span></div>
+        <div class="msg">${mz}</div>
+        <div class="actions"><button class="btn" id="finish">${d.done?(n===5?(S.sealed?"Update & reseal":"Seal the time capsule"):"Update this page"):(n===5?"Seal the time capsule ✉":"Done, close today's page")}</button><span class="saved" id="saved">saved ✓</span></div>
+        ${n===5&&!d.done?`<div class="mini" style="margin-top:10px">Once sealed, your five-day diary and this letter go to the interviewer together.</div>`:""}
+        </div></div>
+    </div>
+  </div>${footer()}`;
+  return h;
+}
+function letter(){
+  const c=S.capsule;
+  if(!c.path)return `<div class="hint center">↑ Choose a future and your letter paper will appear</div>`;
+  const p=PATHS[c.path];
+  return `<div class="card letter fade">
+    <div class="stamp">${SVG.heart(22,"#fff")}${p.stamp}</div>
+    <input type="text" class="greet" id="greet" value="${esc(c.greet||p.greet)}">
+    <div style="height:12px"></div>
+    <textarea id="lbody" placeholder="I hope this letter finds you well. As I write this...">${esc(c.body)}</textarea>
+    <div class="sign"><input type="text" id="sign" value="${esc(c.sign||p.sign)}"></div>
+    <div class="meta" id="lmeta"></div>
+  </div>
+  <div class="hint">Stuck? Tap a question to drop it into your letter:</div>
+  <div class="sparks">${SPARKS.map(s=>`<button type="button" class="spark">${s}</button>`).join("")}</div>`;
+}
+function bindLetter(){
+  const c=S.capsule,body=document.getElementById("lbody");if(!body)return;
+  const meta=document.getElementById("lmeta");
+  const count=()=>{meta.textContent=body.value.trim()?`${body.value.trim().split(/\s+/).length} words`:""};count();
+  body.oninput=()=>{c.body=body.value;count();save()};
+  document.getElementById("greet").oninput=e=>{c.greet=e.target.value;save()};
+  document.getElementById("sign").oninput=e=>{c.sign=e.target.value;save()};
+  document.querySelectorAll(".spark").forEach(b=>b.onclick=()=>{
+    body.value+=(body.value&&!body.value.endsWith("\n")?"\n":"")+"("+b.textContent+")\n";
+    c.body=body.value;save();count();body.focus();body.selectionStart=body.selectionEnd=body.value.length});
+}
+function bindDay(n){
+  const d=day(n);
+  document.querySelectorAll("[data-f]").forEach(t=>t.oninput=()=>{d.fields[t.dataset.f]=t.value;save();if(t.dataset.f==="reward")renderLeft()});
+  document.querySelectorAll("[data-a]").forEach(t=>t.oninput=()=>{S.after[t.dataset.a]=t.value;save()});
+  document.querySelectorAll(".chips").forEach(box=>{
+    const q=box.dataset.q,multi=box.dataset.multi==="1";
+    box.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{
+      let sel=d.chips[q]||[];const v=c.dataset.v;
+      sel=sel.includes(v)?sel.filter(x=>x!==v):(multi?[...sel,v]:[v]);
+      d.chips[q]=sel;save();box.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",sel.includes(x.dataset.v)));
+    });
+  });
+  document.querySelectorAll(".notecard").forEach(nc=>nc.onclick=()=>nc.classList.toggle("open"));
+  document.querySelectorAll(".path").forEach(b=>b.onclick=()=>{
+    const k=b.dataset.p,c=S.capsule;
+    if(c.path!==k){const old=PATHS[c.path];
+      if(!c.greet||(old&&c.greet===old.greet))c.greet=PATHS[k].greet;
+      if(!c.sign||(old&&c.sign===old.sign))c.sign=PATHS[k].sign;
+      c.path=k;save(true)}
+    document.querySelectorAll(".path").forEach(x=>x.classList.toggle("on",x.dataset.p===k));
+    document.getElementById("letterWrap").innerHTML=letter();bindLetter();
+  });
+  bindLetter();bindFooter();
+  document.getElementById("finish").onclick=()=>finishDay(n);
+}
+function finishDay(n){
+  const d=day(n);
+  if(!(d.fields.happened||"").trim()){toast("Start with what happened today");const t=document.querySelector('textarea[data-f="happened"]');t.scrollIntoView({behavior:"smooth",block:"center"});t.focus();return}
+  if(n===5){
+    if(!S.capsule.path){toast("Choose a future first, then write the letter");document.getElementById("capsule").scrollIntoView({behavior:"smooth"});return}
+    if(!(S.capsule.body||"").trim()){toast("Your letter is still empty");document.getElementById("lbody").focus();return}
+  }
+  const was=d.done;d.done=true;if(!d.doneDate)d.doneDate=today();save(true);
+  send("daily",dailyPayload(n)).then(ok=>{if(SUBMIT_URL&&!ok)toast("Connection seems shaky. Your writing is saved on this device")});
+  if(n===5){
+    const c=S.capsule,p=PATHS[c.path],a={};AFTER.forEach(q=>a[q.id]=S.after[q.id]||"");
+    send("final",Object.assign({path:p.zh,greet:c.greet,letter:c.body,sign:c.sign},a));
+    S.sealed=true;S.sealedAt=new Date().toISOString();save(true);viewing=null;render();return;
+  }
+  viewing=null;render();toast(was?"Page updated":`${DAYNAMES[n-1]} is done. Thank you`);
+}
+
+/* ---- finished ---- */
+function finishedPage(){
+  const p=PATHS[S.capsule.path]||PATHS.other;
+  return `${header()}<div class="fade center" style="padding-top:20px">
+    <div style="position:relative;display:inline-block">
+      <div class="env"><div class="b"></div><div class="f"></div><div class="s">${SVG.check()}</div></div>
+      ${stk(SVG.sparkle(30),"left:-34px;top:0")}${stk(SVG.heart(26),"right:-30px;top:30px")}${stk(SVG.squiggle(50),"right:-20px;bottom:6px")}
+    </div>
+    <div style="max-width:560px;margin:0 auto" class="grid">
+      <div class="card blue span2 tilt-l"><div class="ct" style="justify-content:center">Your capsule is sealed</div>
+        <div class="intro" style="margin:10px 0 0;font-size:16px">Five days, five moments, and one letter sent back from “${p.zh}”. Thank you for looking at yourself this carefully. We can start our interview from here.</div></div>
+      <div class="card navy span2 tilt-r" style="text-align:left">
+        <div class="me"><div class="av">${SVG.face(36)}</div><div style="flex:1"><div class="nm">Myself<span>@notetoself</span></div>
+          <div class="msg">I made a choice I'm willing to live with.</div>
+          <div class="actions"><button class="btn" id="dl">Download my diary</button><button class="btn white" id="reread">Reread my letter</button></div></div></div>
+      </div>
+    </div>
+    ${SUBMIT_URL?"":`<p class="hint">If the interviewer asked you to send your diary, tap “Download my diary” and send her the file.</p>`}
+  </div>${footer()}`;
+}
+function bindFinished(){
+  document.getElementById("dl").onclick=download;
+  document.getElementById("reread").onclick=()=>{viewing=5;render();setTimeout(()=>{const l=document.querySelector(".letter");if(l)l.scrollIntoView({behavior:"smooth",block:"start"})},350)};
+  bindFooter();
+}
+function download(){
+  let t=`Marriage Decision Moments · A Five-Day Diary\nParticipant: ${S.pid}\n\n`;
+  for(let n=1;n<=5;n++){const d=S.days[n];if(!d)continue;
+    t+=`==== ${DAYNAMES[n-1]}  ${d.doneDate||""} ====\n`;
+    if(d.fields.reward)t+=`Reward: ${d.fields.reward}\n`;
+    DAILY.forEach(q=>{const tags=(d.chips[q.id]||[]).join(", ");t+=`\n[${q.zh}]\n${tags?tags+"\n":""}${d.fields[q.id]||""}\n`});t+="\n"}
+  t+=`==== After Five Days ====\n`;
+  AFTER.forEach(q=>t+=`\n[${q.zh}]\n${S.after[q.id]||""}\n`);
+  const c=S.capsule;if(c.path)t+=`\n==== Reversed Time Capsule ====\n(${PATHS[c.path].zh})\n\n${c.greet}\n\n${c.body}\n\n${c.sign}\n`;
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain;charset=utf-8"}));
+  a.download=`marriage-decision-diary_${S.pid||"diary"}.txt`;document.body.appendChild(a);a.click();a.remove();
+}
+
+render();
+</script>
+</body>
+</html>
